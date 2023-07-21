@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<div class="col-md-6 offset-md-3">
+
+{% if user.is_authenticated %}
+    {%csrf_token%}
+    <action="{%url 'home'%}">
+        <label for="query" class="form-label">Query</label>
+        <input type="text" id="query" class="form-control">
+    
+        {{query}}
+    </action>
+{%else%}        
+    <h1>Login</h1>
+    <form method="POST" action="{%url 'home'%}">
+        {%csrf_token%}
+        <form>
+            <div class="mb-3">
+            <input type="Text" class="form-control" name="Username", placeholder="Username" required>
+            </div>
+            <div class="mb-3">
+            <input type="password" class="form-control" name="Password", placeholder="Password" required>
+            </div>
+            <button type="submit" class="btn btn-primary">Login</button>
+        </form>
+    </form>
+</div>
+{%endif%}
+{% endblock %}
